@@ -63,3 +63,84 @@ letters = "XYZ"
 for length in range(1, len(letters) + 1):
     for combo in combinations(letters, length):
         print("".join(combo))
+
+
+# სავარჯიშო 7
+from datetime import datetime
+import random
+
+secret = random.randint(1, 20)
+
+start = datetime.now()
+loop = True
+
+while loop:
+
+    finish = (datetime.now() - start).total_seconds()
+
+    if finish > 5:
+        print("დრო ამოიწურა, თქვენ დამარცხდით")
+        print("სწორი პასუხი იყო:", secret)
+        break
+
+    guess = int(input("შეიყვანე რიცხვი (1-20): "))
+
+    if guess == secret:
+        print("გილოცავთ, სწორად გამოიცანით")
+        loop = False
+    else:
+        print("არასწორია, სცადეთ თავიდან")
+# სავარჯიშო 8
+from datetime import datetime, timedelta
+import random
+
+start = datetime.now()
+
+player1 = start + timedelta(seconds=random.randint(5, 20))
+player2 = start + timedelta(seconds=random.randint(5, 20))
+
+time1 = (player1 - start).total_seconds()
+time2 = (player2 - start).total_seconds()
+
+print("Player 1:", time1, "წამი")
+print("Player 2:", time2, "წამი")
+
+if time1 < time2:
+    print("გაიმარჯვა Player 1")
+elif time2 < time1:
+    print("გაიმარჯვა Player 2")
+else:
+    print("ფრე")
+# სავარჯიშო 9
+from datetime import date
+
+birthday = date(2000, 12, 10)
+
+today = date.today()
+
+next_birthday = date(today.year, birthday.month, birthday.day)
+
+if next_birthday < today:
+    next_birthday = date(today.year + 1, birthday.month, birthday.day)
+
+days_left = (next_birthday - today).days
+
+print("შემდეგ დაბადების დღემდე დარჩენილია", days_left, "დღე")
+# სავარჯიშო 10
+import random
+from itertools import product
+
+real_password = ''.join(str(random.randint(1, 6)) for _ in range(4))
+
+print("გენერირებულია ახალი პაროლი")
+
+for password in product('123456', repeat=4):
+
+    attempt = ''.join(password)
+
+    print("ვცდილობ:", attempt)
+
+    if attempt == real_password:
+        print("პაროლი სწორია, საცავი გახსნილია")
+        print("სწორი პაროლი:", real_password)
+        break
