@@ -144,3 +144,43 @@ for password in product('123456', repeat=4):
         print("პაროლი სწორია, საცავი გახსნილია")
         print("სწორი პაროლი:", real_password)
         break
+
+# მეორე ვარიანტი
+symbols = "0123456789"
+
+with open("mainpass.lst", "w") as f:
+    for a in symbols:
+        for b in symbols:
+            for c in symbols:
+                for d in symbols:
+                    for e in symbols:
+                        f.write(a + b + c + d + e + "\n")
+
+print("mainpass.lst is done")
+
+#  მესამე ვარიანტი ოღონდ არ ვიცი მუშაობს თუ არა
+
+import itertools
+
+symbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*-_."
+password_length = 8
+max_lines_per_file = 1000000
+output_file_prefix = "passwords_part"
+
+file_count = 1
+line_count = 0
+out = open(f"{output_file_prefix}{file_count}.lst", "w")
+
+for combo in itertools.product(symbols, repeat=password_length):
+    password = "".join(combo)
+    out.write(password + "\n")
+    line_count += 1
+
+    if line_count >= max_lines_per_file:
+        out.close()
+        file_count += 1
+        line_count = 0
+        out = open(f"{output_file_prefix}{file_count}.lst", "w")
+
+out.close()
+print(f"Done! Generated {file_count} output files.")
